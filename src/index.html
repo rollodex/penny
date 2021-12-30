@@ -1,0 +1,167 @@
+<html>
+   <head>
+     <title></title>
+     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+     <link href="./css/odo.css" rel="stylesheet" />
+     <script src="https://unpkg.com/feather-icons"></script>
+     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <link rel="stylesheet" href="./css/app.css" />
+     <script src="./js/abis.js"></script>
+     <script src="./js/web3.js"></script>
+     <script src="./js/app.js"></script>
+     <script src="./js/odo.js"></script>
+   </head>
+
+   <body class="darkbg h-screen">
+     <header>
+       <nav class="flex items-center justify-start flex-none bg-black py-2 px-6 realtive w-full z-50">
+          <div class=" items-center flex-shrink-0  mr-6">
+            <span class="font-thin font-sans text-5xl tracking-tight ng">Penny</span>
+          </div>
+
+          <div class="w-full inline-block flex-none flex-shrink lg:flex lg:items-center py-5 navdiv lg:w-auto">
+            <a name="hq" href="#hq" class="block mt-4 lg:inline lg:mt-0 text-white hover:text-white mr-4 text-sm uppercase active">
+              Home
+            </a>
+
+            <a name="auctions" href="#auctions" class="block mt-4 lg:inline lg:mt-0 text-white hover:text-white mr-4 text-sm uppercase px-6">
+              Auctions
+            </a>
+
+            <a name="dashboard" href="#dashboard" class="block mt-4 lg:inline lg:mt-0 text-white hover:text-white mr-4 text-sm uppercase">
+              Dashboard
+            </a>
+          </div>
+       </nav>
+     </header>
+
+     <section id="current" class="w-full h-full clearfix">
+     </section>
+
+    <code id="hq">
+      <section class="py-8 lg:py-24">
+          <div class="max-w-lg px-4 mx-auto md:max-w-7xl sm:px-6">
+              <div class="lg:grid lg:grid-cols-5 md:gap-4 md:place-items-center">
+                  <div class="mb-16 text-left lg:col-span-3">
+                      <div class="mb-8 text-xs font-bold tracking-widest text-blue-600 uppercase">
+                      </div>
+                      <h1 class="mb-8 text-4xl font-bold leading-none tracking-tighter  md:text-7xl lg:text-5xl">
+                        Discover a new way to auction NFTs!
+                      </h1>
+                      <p class="mb-8 text-base leading-relaxed text-left text-gray-400">
+                          Penny allows you to auction NFTs on L2, with low fees. It is a penny auction,
+                          which is a timed auction where every bid increments the final auction price by a small amount.
+                          If you are the last bidder when the timer hits zero, you win!
+                      </p>
+                      <div class="md:flex md:items-center md:space-x-8">
+                          <div class="mt-3 rounded-lg">
+                              <button onclick="browseAuctions()" class="items-center block w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                  Browse Auctions
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="hidden lg:block lg:col-span-2">
+                      <div class="relative w-full max-w-lg">
+                          <div class="absolute top-0 rounded-full bg-opacity-30 bg-violet-300 -left-4 w-72 h-72 blur-xl"></div>
+                          <div class="absolute rounded-full bg-opacity-30 bg-fuchsia-300 -bottom-24 right-20 w-72 h-72 blur-xl"></div>
+                          <div class="relative aspect-square">
+                              <img class="object-cover object-center w-full h-full mx-auto rounded-md shadow-2xl" alt="hero" src="assets/sample.jpeg">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+    </code>
+
+    <code id="auctions">
+      <div class=" w-full h-full darkbg ">
+         <div class="flex flex-wrap content-center object-center items-center p-6 text-black ml-20 px-20   h-auto my-20" id="auction-grid">
+         </div>
+    </div>
+
+    </code>
+
+    <code id="auction">
+      <div>
+  <div>
+    <div class="border-r border-black float-left w-1/4 text-black bg-white m-8">
+      <div>
+        <center>
+        <img src="https://via.placeholder.com/384x160/FFFFFF/000000/?text=TEST%20NFT"></img>
+        </center>
+      </div>
+      <div class="border text-center font-extrabold py-2 px-2" id="current-title">Test NFT</div>
+      <div class="text-center py-2 px-2"><span  class="inline" data-feather="clock"></span><span id="current-timer">0:00</span></div>
+
+    </div>
+    <div class="float-right w-2/4 bg-white text-black m-8">
+      <center>
+      <div class="mt-8 text-2xl"> Current Bid </div>
+        <div class=" mt-4 text-4xl"> <span id="current-bid">0.00</span>
+       </div>
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 m-8 rounded inline-flex items-center" onclick="doBid()">Bid</button>
+      </center>
+    </div>
+    <div class="border-t border-black clear-both h-full m-8">
+    <table id="bid-history" class="w-full border bg-white text-black ">
+      <tr id="placehoder">
+        <th>Block</th>
+        <th>Bid</th>
+        <th>Address</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+   </div>
+ </div>
+ </div>
+
+    </code>
+
+<code id="dashboard">
+     <div class="h-full">
+      <!--<div class=" w-11/12 mx-12 mt-12 h-24  px-8 py-6">
+        <center class="font-extrabold text-white text-2xl">Dashboard</center>
+      </div>-->
+
+      <div class=" w-11/12 mx-12 mt-12 -100 px-8 py-6">
+        <center class="font-extrabold text-white text-2xl">Your NFTs</center>
+        <div class="flex flex-wrap content-center object-center items-center p-6 text-black ml-20 px-20 h-auto my-20" id="nft-grid">
+
+        </div>
+      </div>
+
+      <div class=" w-11/12 mx-12 mt-12 px-8 py-6">
+        <center class="font-extrabold text-white text-2xl">Won NFTs</center>
+        <div class="flex flex-wrap content-center object-center items-center p-6 text-black ml-20 px-20 h-auto my-20" id="won-grid">
+
+         </div>
+      </div>
+
+      <div class=" w-11/12 mx-12 mt-12  px-8 py-6">
+        <center class="font-extrabold text-white text-2xl">Expired Auctions</center>
+        <div class="flex flex-wrap content-center object-center items-center p-6 text-black ml-20 px-20 h-auto my-20" id="expired-grid">
+
+       </div>
+      </div>
+
+      <div class="w-11/12 mx-12 mt-12 h-18 border-2 rounded px-8 py-6 mb-16 bg-gray-200">
+        <form>
+          <center>
+            <button type="button" id="mintBtn" onclick="doMint()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 m-8 rounded inline-flex items-center">Mint</button>
+          </center>
+        </form>
+      </div>
+     </div>
+    </code>
+
+   </body>
+
+</html>
