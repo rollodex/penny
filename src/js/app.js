@@ -75,7 +75,7 @@ var TransitionTable = {
           $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids();
     })
     },
-    updater: function() { loadAuctions(); $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');//loadBids(); }
+    updater: function() { loadAuctions(); $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>'); }
   },
   dashboard: {
     loader: function () {
