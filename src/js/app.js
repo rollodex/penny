@@ -68,6 +68,12 @@ var TransitionTable = {
      $('[name="hq"]').removeClass('active');
      $('[name="dashboard"]').removeClass('active');
      $('[name="auctions"]').addClass('active');
+     WC.auction.instance.methods.auctions(State.target.value).call().then( (auction) => {
+          var bid = auction.currentBid;
+          $('#current-bid').text(parseFloat(web3.utils.fromWei(bid)));
+          //emitRow2(auction);
+          $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids();
+    })
     },
     updater: function() { loadAuctions(); $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids(); }
   },
@@ -294,6 +300,8 @@ function updateOdo(id,count) {
   var digits = num.toString().length - 1
   var zero = '0'
   var leading = (!isNaN(display)) ? zero.repeat(17-digits) : '00'
+   if ($('#card-' + id)[0] == undefined)
+      return;
 
   if ($('#card-' + id)[0].hasAttribute("skipDigit")) {
     display *= 10
@@ -352,7 +360,7 @@ function updateTarget() {
     time = new Date(time * 1000).toISOString().substr(11, 8)
   $('#current-timer').text(time);
 
-  $('#current-bid').text(web3.utils.fromWei(auction.currentBid));
+  //$('#current-bid').text(web3.utils.fromWei(auction.currentBid));
   $('#current-title').text('Test NFT #' + auction.itemId);
 }
 
@@ -443,6 +451,13 @@ function doBid() {
 
       factory.methods.bid(State.target.value).send({ from: State.user.value, value: bid }).then ( () => {
         console.log("bid placed")
+
+         factory.methods.auctions(State.target.value).call().then( (auction) => {
+              var bid = auction.currentBid;
+              $('#current-bid').text(parseFloat(web3.utils.fromWei(bid)));
+              //emitRow2(auction);
+              $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids();
+        })
       })
     });
 }
