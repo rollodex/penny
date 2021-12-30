@@ -75,7 +75,7 @@ var TransitionTable = {
           $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids();
     })
     },
-    updater: function() { loadAuctions(); $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');loadBids(); }
+    updater: function() { loadAuctions(); $("#bid-history").empty();$('#bid-history').append('<tr id="placeholder"><th>Block</th><th>Bid</th><th>Address</th></tr>');//loadBids(); }
   },
   dashboard: {
     loader: function () {
@@ -180,7 +180,7 @@ function startApp() {
 
            WC.auction.instance.events.BidPlaced({fromBlock:num}, function(error, event){
              console.log('event: ' + event);
-             emitRow2(event);
+             //emitRow2(event);
              var aID = event.returnValues.auction_id;
 
              WC.auction.instance.methods.auctions(aID).call().then(function (auction) {
